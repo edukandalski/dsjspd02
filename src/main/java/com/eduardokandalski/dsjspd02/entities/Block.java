@@ -19,13 +19,18 @@ public class Block {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant finish;
 
+    @ManyToOne
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
+
     public Block() {
     }
 
-    public Block(Integer id, Instant start, Instant finish) {
+    public Block(Integer id, Instant start, Instant finish, Activity activity) {
         this.id = id;
         this.start = start;
         this.finish = finish;
+        this.activity = activity;
     }
 
     public Integer getId() {
@@ -50,6 +55,14 @@ public class Block {
 
     public void setFinish(Instant finish) {
         this.finish = finish;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     @Override

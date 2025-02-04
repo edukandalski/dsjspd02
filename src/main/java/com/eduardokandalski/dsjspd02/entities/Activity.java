@@ -2,6 +2,8 @@ package com.eduardokandalski.dsjspd02.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +14,8 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Double price;
 
@@ -19,14 +23,18 @@ public class Activity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "activity")
+    private List<Block> blocks = new ArrayList<>();
+
     public Activity() {
     }
 
-    public Activity(Integer id, String name, String description, Double price) {
+    public Activity(Integer id, String name, String description, Double price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -59,6 +67,18 @@ public class Activity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Block> getBlocks() {
+        return blocks;
     }
 
     @Override

@@ -13,6 +13,8 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "category")
